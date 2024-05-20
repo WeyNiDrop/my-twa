@@ -2,9 +2,9 @@ import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, 
 
 export type CounterConfig = {};
 
-export function counterConfigToCell(config: CounterConfig): Cell {
-    return beginCell().endCell();
-}
+// export function counterConfigToCell(config: CounterConfig): Cell {
+//     return beginCell().endCell();
+// }
 
 export class Counter implements Contract {
     constructor(readonly address: Address, readonly init?: { code: Cell; data: Cell }) {}
@@ -23,11 +23,11 @@ export class Counter implements Contract {
         return new Counter(address);
     }
 
-    static createFromConfig(config: CounterConfig, code: Cell, workchain = 0) {
-        const data = counterConfigToCell(config);
-        const init = { code, data };
-        return new Counter(contractAddress(workchain, init), init);
-    }
+    // static createFromConfig(config: CounterConfig, code: Cell, workchain = 0) {
+    //     const data = counterConfigToCell(config);
+    //     const init = { code, data };
+    //     return new Counter(contractAddress(workchain, init), init);
+    // }
 
     async sendDeploy(provider: ContractProvider, via: Sender, value: bigint) {
         await provider.internal(via, {
